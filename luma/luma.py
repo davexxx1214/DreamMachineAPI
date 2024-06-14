@@ -141,6 +141,8 @@ class VideoGen:
             time.sleep(3)
             print("sleep 3")
         content = self.session.get(video_url)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
         with open(f"{output_dir}/output.mp4", "wb") as f:
             f.write(content.content)
         print(f"Video saved to {output_dir}/output.mp4")
