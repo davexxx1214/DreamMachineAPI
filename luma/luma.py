@@ -108,7 +108,8 @@ class VideoGen:
             "Referer": "https://lumalabs.ai",
             "content-type": "application/json"
         }
-
+        if not os.path.exists(output_dir):
+            os.mkdir(output_dir)
         try:
             r = self.session.post(url, json=payload, headers=headers).json()
             task_id = r[0]["id"]
