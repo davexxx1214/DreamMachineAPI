@@ -1,41 +1,36 @@
-# Dream Machine API
+# IdeoImageCreator
+Fork from https://github.com/danaigc/DreamMachineAPI
+About High quality video generation by lumalabs.ai. Reverse engineered API.
 
-A Python script to generate videos using the Dream Machine API and fetch the latest generated video link.
+![image](./a.png)
 
-## Features
+![video](./a.mp4)
 
-- Generate videos via Dream Machine API.
-- Asynchronously check for video generation status.
-- Output the latest generated video link.
+## How to
+- Login https://lumalabs.ai/ and generate video.
+- Use `Chrome` or other browsers to inspect the network requests (F12 -> XHR).
+- Clone this REPO -> `git clone https://github.com/yihong0618/IdeoImageCreator.git`
+- Copy the cookie.
+ Export LUMA_COOKIE='xxxxx'.
 
-## Prerequisites
+## Usage
 
-- Python 3.7+
-- `requests`
-- `aiohttp`
+```
+python -m luma --prompt 'make this picture alive' -I a.png
+```
 
-## Installation
+or
+```
+pip install -U luma-creator 
+```
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/danaigc/DreamMachineAPI.git
-    cd DreamMachineAPI
-    pip install -r requirements.txt
-    ```
-   You need to replace the value of the access_token variable to make sure the project works   
+```python
+from luma import VideoGen
+i = VideoGen('cookie', 'image_url' ) # Replace 'cookie', image_url with your own
+print(i.get_limit_left())
+i.save_video("a blue cyber dream", './output')
+```
 
-   Log in using Google Chrome https://lumalabs.ai/dream-machine/
+## Thanks
 
-   Get your access_token here
-  ![WechatIMG4170.jpg](https://s2.loli.net/2024/06/13/Cd6gQ4AaZKGNb3r.png)
-2. Run Script:
-    ```bash
-    python main.py
-    ```
-3. Result
-
-   ![WechatIMG4186.jpg](https://s2.loli.net/2024/06/14/cBe9M3kLijZQaYH.jpg)
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=danaigc/DreamMachineAPI&type=Date)](https://star-history.com/#danaigc/DreamMachineAPI&Date)
+- [DreamMachineAPI](https://github.com/danaigc/DreamMachineAPI)
