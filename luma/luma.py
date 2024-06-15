@@ -158,6 +158,7 @@ class VideoGen:
         with open(video_path, "wb") as f:
             f.write(content.content)
         print(f"Video saved to {video_path}")
+        return video_path
 
 def main():
     parser = argparse.ArgumentParser()

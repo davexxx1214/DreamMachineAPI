@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="luma-creator",
-    version="0.0.3",
+    version="0.0.4",
     author="danaigc, yihong0618",
     author_email="zouzou0208@gmail.com",
     description="High quality video generation by https://lumalabs.ai/. Reverse engineered API.",
