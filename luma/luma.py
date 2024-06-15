@@ -2,15 +2,15 @@ import argparse
 import os
 import time
 from http.cookies import SimpleCookie
+from datetime import datetime
+from urllib.parse import urlparse, unquote
 
-from http.cookies import SimpleCookie
 from fake_useragent import UserAgent
 import requests
 from requests.utils import cookiejar_from_dict
 
 browser_version = "edge101"
 ua = UserAgent(browsers=["edge"])
-
 
 class VideoGen:
     def __init__(self, cookie, image_file="") -> None:
@@ -52,7 +52,6 @@ class VideoGen:
         response.raise_for_status()
         return response.json()
 
-
     def upload_file(self):
         try:
             signed_upload = self.get_signed_upload()
@@ -79,6 +78,13 @@ class VideoGen:
 
         response = self.session.get(url, params=querystring)
         return response.json()
+
+    @staticmethod
+    def generate_slug(url):
+        path = urlparse(url).path
+        filename = os.path.basename(unquote(path))
+        slug, _ = os.path.splitext(filename)
+        return slug
 
     def save_video(
         self,
@@ -128,7 +134,7 @@ class VideoGen:
                 if it["id"] == task_id:
                     print(f"proceeding state {it['state']}")
                     if it["state"] == "pending":
-                        print("pending in queue will wait more time") 
+                        print("pending in queue will wait more time")
                         time.sleep(30)
                     if it["state"] == "failed":
                         print("generate failed")
@@ -142,9 +148,16 @@ class VideoGen:
             time.sleep(3)
             print("sleep 3")
         content = self.session.get(video_url)
-        with open(f"{output_dir}/output.mp4", "wb") as f:
+
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        slug = self.generate_slug(video_url)
+        video_path = f"{output_dir}/output_{slug}.mp4"
+
+        with open(video_path, "wb") as f:
             f.write(content.content)
-        print(f"Video saved to {output_dir}/output.mp4")
+        print(f"Video saved to {video_path}")
 
 def main():
     parser = argparse.ArgumentParser()
@@ -177,7 +190,6 @@ def main():
         prompt=args.prompt,
         output_dir=args.output_dir,
     )
-
 
 if __name__ == "__main__":
     main()

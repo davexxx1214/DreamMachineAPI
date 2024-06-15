@@ -1,4 +1,4 @@
-# IdeoImageCreator
+# Dream Machine API
 Fork from https://github.com/danaigc/DreamMachineAPI
 About High quality video generation by lumalabs.ai. Reverse engineered API.
 
@@ -11,7 +11,7 @@ https://github.com/yihong0618/DreamMachineAPI/assets/15976103/a55ee848-ab50-4769
 ## How to
 - Login https://lumalabs.ai/ and generate video.
 - Use `Chrome` or other browsers to inspect the network requests (F12 -> XHR).
-- Clone this REPO -> `git clone https://github.com/yihong0618/IdeoImageCreator.git`
+- Clone this REPO -> `git clone https://github.com/yihong0618/DreamMachineAPI.git`
 - Copy the cookie.
  Export LUMA_COOKIE='xxxxx'.
 
