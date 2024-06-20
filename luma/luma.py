@@ -127,8 +127,8 @@ class VideoGen:
         start = time.time()
         video_url = ""
         while True:
-            if int(time.time() - start) > 1200:
-                raise Exception("Error 20 minutes passed.")
+            if int(time.time() - start) > 3600:
+                raise Exception("Error 60 minutes passed.")
             response_json = self.refresh_dream_machine()
             for it in response_json:
                 if it["id"] == task_id:
